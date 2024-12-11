@@ -1,27 +1,43 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Lenis from "@studio-freight/lenis"; // Import Lenis
 import Header from "./component/Header";
-import Page1 from "./pages/Page1";
-import Page2 from "./pages/Page2";
-import Page3 from "./pages/Page3";
-import Page4 from "./pages/Page4";
-import Page5 from "./pages/Page5";
-import Page6 from "./pages/Page6";
 import Main from "./pages/Main";
 import HireMe from "./pages/HireMe";
 import Worq from "./pages/Worq";
 
 function App() {
+  const scrollRef = useRef(null); // Reference for the scroll container
+
+  useEffect(() => {
+    // Initialize Lenis
+    const lenis = new Lenis({
+      el: scrollRef.current, // Set the container
+      smooth: true,          // Enable smooth scrolling
+    });
+
+    // Animation loop for Lenis
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy(); // Cleanup Lenis instance on component unmount
+    };
+  }, []);
+
   return (
     <Router>
-      <div id="main">
+      <div id="main" ref={scrollRef}>
+        <Header />
         <Routes>
-          <Route path="/" element={<Main/>} />
+          <Route path="/" element={<Main />} />
           <Route path="/hire-me" element={<HireMe />} />
           <Route path="/work" element={<Worq />} />
-          {/* <Route path="/page4" element={<Page4 />} />
-          <Route path="/page5" element={<Page5 />} />
-          <Route path="/page6" element={<Page6 />} /> */}
+          {/* Additional routes */}
         </Routes>
       </div>
     </Router>
