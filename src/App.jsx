@@ -32,7 +32,7 @@ function App() {
   return (
     <Router>
       <div id="main" ref={scrollRef}>
-        <Header />
+        {/* <Header /> */}
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/hire-me" element={<HireMe />} />

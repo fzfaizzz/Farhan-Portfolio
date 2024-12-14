@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { AiOutlinePhone, AiOutlineMail, AiOutlineGlobal } from "react-icons/ai";
 import emailjs from "emailjs-com";
 import { Toaster, toast } from "react-hot-toast";
+import Header from "../component/Header";
 
 function HireMe() {
   const formRef = useRef();
@@ -37,7 +38,7 @@ function HireMe() {
 
         {/* Header with right padding */}
         <div className="pr-4 md:pr-10 absolute -left-10 -mt-10">
-         
+         <Header/>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 h-full">
